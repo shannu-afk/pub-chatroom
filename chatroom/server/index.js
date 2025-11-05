@@ -30,8 +30,11 @@ const server = http.createServer(app);
 
 const allowedOrigins = [
   'http://localhost:3000',
-  'https://chatroom1-6.onrender.com'
+  'https://chatroom1-6.onrender.com',
+  'https://nonnle.web.app',
+  'https://nonnle.firebaseapp.com'
 ];
+
 
 app.use(cors({
   origin: allowedOrigins,
