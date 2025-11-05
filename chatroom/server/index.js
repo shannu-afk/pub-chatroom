@@ -1,17 +1,5 @@
 // server/index.js
 // Full backend with OTP, Socket.IO chat, and call signaling.
-const express = require('express');
-const cors = require('cors');
-const app = express();
-
-// Allow your Firebase domain
-app.use(cors({
-  origin: ['https://nonnle.web.app'],  // frontend URL
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true
-}));
-
-app.use(express.json());
 
 const express = require('express');
 const http = require('http');
@@ -38,18 +26,6 @@ const Message = require('./models/messages');
 const User = require('./models/User');
 const server = http.createServer(app);
 
-const allowedOrigins = [
-  'http://localhost:3000',
-  'https://pub-chatroom.onrender.com',
-  'https://nonnle.web.app',
-  'https://nonnle.firebaseapp.com'
-];
-
-
-app.use(cors({
-  origin: allowedOrigins,
-  credentials: true
-}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -229,7 +205,7 @@ app.get('*', (req, res) => {
 // -----------------
 const io = socketIO(server, {
   cors: {
-    origin: allowedOrigins,
+    origin: '*',
     methods: ['GET', 'POST'],
     credentials: true
   }
