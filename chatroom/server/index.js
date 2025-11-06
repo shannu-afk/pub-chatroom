@@ -24,8 +24,19 @@ try {
 // Models (these must exist)
 const Message = require('./models/messages');
 const User = require('./models/User');
+
+const app = express();
 const server = http.createServer(app);
 
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://chatroom1-6.onrender.com'
+];
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -205,7 +216,7 @@ app.get('*', (req, res) => {
 // -----------------
 const io = socketIO(server, {
   cors: {
-    origin: '*',
+    origin: allowedOrigins,
     methods: ['GET', 'POST'],
     credentials: true
   }
